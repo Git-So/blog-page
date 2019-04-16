@@ -1,0 +1,144 @@
+// 全局变量定义文件
+@import '~/assets/style/_var.scss';
+
+.markdown-body {
+  font-size: 18px;
+  background: white;
+  color: $--color-text;
+
+  * {
+    box-sizing: border-box;
+    font-size: inherit;
+    font-family: Source Sans Pro, Helvetica Neue, Arial, sans-serif;
+    letter-spacing: 0.05rem;
+  }
+
+  .v-show-content {
+    background: white;
+  }
+
+  // 标题
+  h1 {
+    font-size: 1.75rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  h3 {
+    font-size: 1.33rem;
+  }
+
+  h4 {
+    font-size: 1.14rem;
+  }
+
+  h5 {
+    font-size: 1rem;
+  }
+
+  h6 {
+    font-size: 0.8rem;
+  }
+
+  h1,
+  h2 {
+    // border-bottom: 0;
+  }
+
+  // 强调
+  h1,
+  h2,
+  h3,
+  h4,
+  strong {
+    color: $--color-text;
+    font-weight: 600;
+  }
+
+  // 字体样式
+  ol,
+  ul,
+  p {
+    line-height: 1.6rem;
+    word-spacing: 0.05rem;
+  }
+
+  // 列表
+  li {
+    color: $--color-li-text;
+  }
+
+  // 段落
+  p {
+    margin: 1.2em 0;
+  }
+
+  // 引用
+  blockquote {
+    border-left: 4px solid $--color-primary;
+    margin: 2em 0;
+    padding-left: 20px;
+
+    p {
+      color: $--color-text-second;
+    }
+  }
+
+  // 代码
+  pre {
+    background-color: $--color-code-background;
+    font-family: Roboto Mono, Monaco, courier, monospace;
+    font-size: 1rem;
+    margin: 1.2em 0;
+    padding: 0 1.4rem;
+    position: relative;
+    height: auto;
+
+    &:after {
+      color: $--color-lang-mark-background;
+      content: attr(data-lang);
+      font-size: 0.6rem;
+      font-weight: 600;
+      height: 15px;
+      line-height: 15px;
+      padding: 13px 35px 0;
+      position: absolute;
+      right: 0;
+      text-align: right;
+      top: 0;
+    }
+
+    .hljs {
+      background-color: $--color-code-background;
+    }
+
+    .hljs,
+    code {
+      // color: $--color-code-text;
+      padding: 2.2em 0;
+      padding-bottom: 1.2rem;
+    }
+  }
+
+  // 链接
+  a {
+    color: $--color-primary;
+    font-weight: 600;
+  }
+
+  // 角标
+  sub,
+  sup {
+    font-size: 0.8rem;
+    color: $--color-text-second;
+  }
+
+  // emoji
+  img.emoji {
+    width: 1.2rem;
+    height: 1.2rem;
+    margin: 0 2px;
+  }
+}
