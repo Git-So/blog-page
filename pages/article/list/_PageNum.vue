@@ -44,7 +44,7 @@ export default {
   },
   methods: {
     onInit() {
-      console.log(this.list)
+      // console.log(this.list)
     }
   }
 }

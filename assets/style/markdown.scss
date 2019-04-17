@@ -42,11 +42,6 @@
     font-size: 0.8rem;
   }
 
-  h1,
-  h2 {
-    // border-bottom: 0;
-  }
-
   // 强调
   h1,
   h2,
@@ -90,7 +85,7 @@
   pre {
     background-color: $--color-code-background;
     font-family: Roboto Mono, Monaco, courier, monospace;
-    font-size: 1rem;
+    font-size: $--font-size-code;
     margin: 1.2em 0;
     padding: 0 1.4rem;
     position: relative;

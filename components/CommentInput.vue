@@ -55,10 +55,10 @@
         </div>
       </div>
       <div class="preview" :hidden="!isPreview">
-        <div class="comment" v-html="html" />
+        <div class="comment comment-content" v-html="html" />
       </div>
       <div class="help" :hidden="!isHelp">
-        <div v-html="doParseMarkdown(help)" />
+        <div class="comment-content" v-html="doParseMarkdown(help)" />
       </div>
     </div>
   </section>
@@ -298,6 +298,9 @@ export default {
       // 光标选定
       this.inputEl.focus()
     },
+    onClearInput() {
+      this.input = ''
+    },
     onSelectEmoji() {
       // 显示Emoji选择框
       this.hideAllContent()
@@ -321,12 +324,12 @@ export default {
       this.isPreview = true
 
       // 预览数据
-      console.warn('preview')
+      // console.warn('preview')
       const html = this.doParseMarkdown(this.input)
 
       // emoji
       this.html = Twemoji.parse(html)
-      console.log(this.html)
+      // console.log(this.html)
     },
     onSelectHelp() {
       // 显示 Help
@@ -357,7 +360,7 @@ export default {
       }
     },
     onInputKey(e) {
-      console.warn('onInputKey')
+      // console.warn('onInputKey')
 
       // 快捷键设置
       this.onCommonKey(e)
@@ -370,7 +373,7 @@ export default {
       }
     },
     onEmojiKey(e) {
-      console.warn('onEmoijKey')
+      // console.warn('onEmoijKey')
 
       // 快捷键设置
       // this.onCommonKey(e)
@@ -381,7 +384,7 @@ export default {
         // 无选中则默认第一个
         if (!this.isActiveEmoji) {
           this.isActiveEmoji = this.emoji[0]
-          console.log(this.isActiveEmoji)
+          // console.log(this.isActiveEmoji)
           return
         }
 
@@ -507,6 +510,7 @@ export default {
 </script>
 <style lang="scss">
 @import '~/assets/style/markdown.scss';
+@import '~/assets/style/comment.scss';
 
 .view-comment-input {
   $content-select-padding: 0.5rem;
@@ -598,11 +602,6 @@ export default {
       overflow-y: auto;
       border-width: 0;
       background-color: white;
-      // border-bottom: $border-size solid;
-
-      & > * {
-        background-color: white;
-      }
 
       &::-webkit-scrollbar {
         width: $content-scrollbar-width; /*高宽分别对应横竖滚动条的尺寸*/
@@ -658,102 +657,6 @@ export default {
             width: 80%;
             height: 80%;
           }
-        }
-      }
-    }
-
-    .preview > div,
-    .help > div {
-      overflow-y: auto;
-      width: $width;
-
-      img.emoji {
-        width: 1.5rem;
-        height: 1.5rem;
-        margin: 0 0.2rem;
-      }
-
-      * {
-        word-wrap: break-word;
-        word-break: normal;
-      }
-
-      .h1 {
-        font-size: 1.25rem;
-        font-weight: 700;
-      }
-
-      .h2 {
-        font-size: 1.14rem;
-        font-weight: 600;
-      }
-
-      .h3 {
-        font-size: 1.02rem;
-        font-weight: 600;
-      }
-
-      .h4 {
-        font-size: 0.95rem;
-        font-weight: 600;
-      }
-
-      .h5 {
-        font-size: 0.85rem;
-        font-weight: 600;
-      }
-
-      .h6 {
-        font-size: 0.76rem;
-        font-weight: 600;
-      }
-
-      blockquote {
-        $blockquote-padding: 0.4rem;
-        color: #6a737d;
-        padding: $blockquote-padding 1em;
-        border-left: 4px solid #42b983;
-        padding-left: 1.2rem;
-
-        &:nth-child(1) {
-          margin-top: $blockquote-padding;
-        }
-        &:nth-last-child(1) {
-          margin-bottom: $blockquote-padding;
-        }
-      }
-
-      ul,
-      ol {
-        padding: 0.5rem 1rem;
-      }
-
-      .lang {
-        background-color: #f8f8f8;
-        margin: 0.65rem 0;
-        position: relative;
-        border-radius: 3px;
-
-        &::before {
-          z-index: 100;
-          color: #ccc;
-          content: attr(data-lang);
-          font-size: 0.6rem;
-          font-weight: 600;
-          height: 15px;
-          line-height: 15px;
-          position: absolute;
-          right: 1rem;
-          text-align: right;
-          top: 0.5rem;
-        }
-
-        .code {
-          height: auto;
-          font-size: 0.92rem;
-          overflow-x: auto;
-          padding: 1.65rem 1rem;
-          overflow-y: hidden;
         }
       }
     }

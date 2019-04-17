@@ -33,6 +33,9 @@ export default {
       // 检测是否存在同级
       if (list.length > 0) {
         for (let key = list.length - 1; key > -1; key--) {
+          if (args[1] === undefined) {
+            continue
+          }
           // 依然为当前等级子列表
           if (list[key].length === args[1].length) {
             break
@@ -141,7 +144,7 @@ export default {
       })
 
       // 字体样式检测 (单符号语法)
-      line = line.replace(/([*_^~])(\S+)?([*_^~])/, (...args) => {
+      line = line.replace(/([*_^~`])(\S+)?([*_^~`])/, (...args) => {
         // 前后必须一致才满足语法
         if (args[1] !== args[3]) {
           return args[1] + args[2] + args[3]
@@ -163,6 +166,10 @@ export default {
             // 下角标
             tagName = 'sub'
             break
+          case '`':
+            // 代码
+            tagName = 'code'
+            break
           default:
             // 不匹配规则
             return args[1] + args[2] + args[3]
@@ -177,7 +184,7 @@ export default {
     let html = ''
     const reg = {
       list: /^(\s*)(\+|-|\d\.)\s+(.+)\s*$/,
-      blockquote: /^(>+)?\s+(.*)$/,
+      blockquote: /^(>+)\s+(.*)$/,
       code: /^`{3}\s*(\S*)\s*.*$/
     }
     for (let line of lines) {
@@ -209,6 +216,42 @@ export default {
         html += line + '<br/>'
         continue
       }
+
+      // 代码块开始检测(代码块有优选权，且排斥其他语法)
+      if (reg.code.test(line)) {
+        line = line.replace(reg.code, (...args) => {
+          // 启用代码状态
+          block.isCode = true
+          html += `<pre class="lang" data-lang="${args[1]}"><div class="code">`
+        })
+        // 代码块不能使用其他语法
+        continue
+      }
+
+      // 块引用开始检测
+      line = line.replace(reg.blockquote, (...args) => {
+        // 生成 html
+        let tagNode = ''
+        let offset = checkBlock('blockquote', args)
+        switch (true) {
+          case offset > 0:
+            tagNode = `<blockquote>${args[2]}`
+            break
+          case offset === 0:
+            tagNode = `</blockquote><blockquote>${args[2]}`
+            break
+          case offset < 0:
+            while (offset) {
+              block.blockquote.pop()
+              tagNode += `</blockquote>`
+              offset++
+            }
+            tagNode += `</blockquote><blockquote>${args[2]}`
+            break
+        }
+
+        return tagNode
+      })
 
       // 行解析
       line = parseLine(line)
@@ -244,44 +287,6 @@ export default {
 
         return tagNode
       })
-
-      // 块引用开始检测
-      // console.log(line);
-      line = line.replace(reg.blockquote, (...args) => {
-        // 生成 html
-        let tagNode = ''
-        let offset = checkBlock('blockquote', args)
-        switch (true) {
-          case offset > 0:
-            tagNode = `<blockquote>${args[2]}`
-            break
-          case offset === 0:
-            tagNode = `</blockquote><blockquote>${args[2]}`
-            break
-          case offset < 0:
-            while (offset) {
-              block.blockquote.pop()
-              tagNode += `</blockquote>`
-              offset++
-            }
-            tagNode += `</blockquote><blockquote>${args[2]}`
-            break
-        }
-
-        return tagNode
-      })
-      // console.log(line);
-
-      // 代码块开始检测(代码块有优选权，且排斥其他语法)
-      if (reg.code.test(line)) {
-        line = line.replace(reg.code, (...args) => {
-          // 启用代码状态
-          block.isCode = true
-          html += `<pre class="lang" data-lang="${args[1]}"><div class="code">`
-        })
-        // 代码块不能使用其他语法
-        continue
-      }
 
       // 添加代码
       html += line

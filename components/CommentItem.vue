@@ -63,6 +63,7 @@ export default {
 <style lang="scss">
 @import '~/assets/style/_var.scss';
 @import '~/assets/style/markdown.scss';
+@import '~/assets/style/comment.scss';
 
 section.view-comment-item {
   border-bottom: 1px solid $--color-border;

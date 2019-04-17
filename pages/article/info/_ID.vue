@@ -1,5 +1,5 @@
 <template>
-  <section class="page-article-info" @scroll="onNavActive">
+  <section class="page-article-info">
     <!-- 文章详情 -->
     <view-article :article="info" />
 
@@ -26,7 +26,7 @@
           </el-col>
         </el-row>
       </el-form>
-      <view-comment-input v-model="form.Content" />
+      <view-comment-input v-model="form.Content" ref="commentInput" />
       <el-row class="btn">
         <el-col :span="16">
           <span>请注意，您所发表的评论本站有权屏蔽或删除</span>
@@ -112,7 +112,7 @@ export default {
       this.getCommentList()
     },
     onSendComment() {
-      console.log(this.form)
+      // console.log(this.form)
       this.form.loading = true
 
       // 评论内容
@@ -134,17 +134,16 @@ export default {
           } else {
             this.$message.success(resp.Msg)
             this.comment.useCache = false
+            this.form.Content = ''
+            this.$refs.commentInput.onClearInput()
             this.getCommentList()
           }
         })
         .catch(err => {
           this.form.loading = false
-          console.log(err)
+          // console.log(err)
           this.$message.error('发表评论失败')
         })
-    },
-    onNavActive(e) {
-      console.log('cxcx')
     },
     async getInfo() {
       const url = `article/info/${this.ID}`

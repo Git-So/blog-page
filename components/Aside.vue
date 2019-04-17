@@ -141,7 +141,7 @@ export default {
       JsonData.data.configList.forEach(e => {
         this.$store.commit('setMeData', { index: e.Key, value: e.Value })
       })
-      console.log(this.dataMe)
+      // console.log(this.dataMe)
     }
   }
 }

@@ -54,6 +54,9 @@ export default {
       })
     }
   },
+  mounted() {
+    this.onMenuNav()
+  },
   updated() {
     this.onMenuNav()
   },
@@ -62,6 +65,9 @@ export default {
       // 清空数据
       this.$store.commit('setArticleNav', '')
       this.$store.commit('setArticleActiveNav', '')
+
+      // 导航
+      this.onMenuNav()
     },
     onNavActive() {},
     doExpire(time) {
@@ -70,6 +76,8 @@ export default {
       return expir < Number(Helper.Timestamp())
     },
     onMenuNav() {
+      // 未更新
+      if (!this.$refs.article) return
       // 获取瞄点(仅h2,h3)
       const els = this.$refs.article.querySelectorAll('h2,h3')
       const navList = []
