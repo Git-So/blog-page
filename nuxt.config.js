@@ -48,8 +48,8 @@ export default {
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
     https: false,
-    host: '0.0.0.0',
-    port: '80',
+    host: '172.17.0.2',
+    port: '8097',
     prefix: '/api/v1/',
     progress: true,
     credentials: true,

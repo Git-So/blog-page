@@ -7,9 +7,12 @@
     </div>
 
     <!-- 列表 -->
-    <h3>最新文章</h3>
+    <h3>最新专题</h3>
     <div v-loading="loading" class="block-list">
       <view-subject-item v-for="item in list" :key="item.ID" :subject="item" />
+      <div v-if="loading || !count" class="nil-data">
+        暂时还没有专题哦!
+      </div>
     </div>
 
     <!-- 翻页 -->

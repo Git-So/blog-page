@@ -155,7 +155,7 @@ section.view-aside {
 
   .hide {
     opacity: 0;
-    transition: 0.3s;
+    transition: 0.5s;
   }
 
   & > div.el-card {

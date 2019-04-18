@@ -3,7 +3,12 @@
     <!-- 列表 -->
     <h3>友链列表</h3>
     <div v-loading="loading" class="block-list">
-      <view-link-item v-for="item in list" :key="item.ID" :link="item" />
+      <div>
+        <view-link-item v-for="item in list" :key="item.ID" :link="item" />
+      </div>
+      <div v-if="loading || !count" class="nil-data">
+        暂时还没有友链哦!
+      </div>
     </div>
 
     <!-- 翻页 -->
@@ -44,3 +49,23 @@ export default {
   }
 }
 </script>
+<style lang="scss">
+section.page-link-list {
+  @media (max-width: 765px) {
+    div.block-list {
+      div {
+        section.view-link-item {
+          color: red;
+          &:nth-child(odd) {
+            margin-left: 0;
+          }
+        }
+      }
+    }
+  }
+
+  h3 {
+    margin-bottom: 0.9rem;
+  }
+}
+</style>

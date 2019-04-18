@@ -1,5 +1,6 @@
 // 全局变量定义文件
 @import '~/assets/style/_var.scss';
+@import '~/assets/style/mobile.scss';
 
 html {
   font-family: $--font-family;
@@ -34,12 +35,26 @@ body {
   overflow-y: scroll;
 }
 
-@media (max-width: 768px) {
-  .container {
-    width: 100%;
+// 动画
+.page-enter-active,
+.page-leave-active {
+  transition: opacity 0.3s;
+}
 
-    .main {
-      padding: 0;
+.page-enter,
+.page-leave-active {
+  opacity: 0;
+}
+
+@media (max-width: 765px) {
+  section.el-container {
+    div.container {
+      width: 100%;
+      margin-top: 60px;
+
+      .main {
+        padding: 0;
+      }
     }
   }
 }
@@ -91,6 +106,10 @@ body {
 
     div.block-list {
       min-height: 10rem;
+    }
+
+    div.nil-data {
+      margin-left: 1rem;
     }
   }
 }

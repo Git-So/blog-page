@@ -89,7 +89,7 @@ export const GetList = {
       search: '',
       pageNum: 1,
       pageSize: 0,
-      count: 0,
+      count: 1,
       loading: false,
       pageClass: 'page'
     }

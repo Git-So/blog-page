@@ -106,10 +106,12 @@ export default {
           }
           nowEl = el
         }
-        this.$store.commit(
-          'setArticleActiveNav',
-          `#${nowEl.querySelector('a').id}`
-        )
+        if (nowEl) {
+          this.$store.commit(
+            'setArticleActiveNav',
+            `#${nowEl.querySelector('a').id}`
+          )
+        }
       }
     }
   }
@@ -118,7 +120,16 @@ export default {
 <style lang="scss">
 @import '~/assets/style/_var.scss';
 @import '~/assets/style/markdown.scss';
+
 section.view-article {
+  @media (max-width: 765px) {
+    article + section.block-time {
+      & > div {
+        margin: 0 1rem;
+      }
+    }
+  }
+
   min-height: 10rem;
   margin: 2rem 0 1.5rem 0;
 

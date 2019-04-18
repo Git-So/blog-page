@@ -2,14 +2,15 @@
   <section class="view-comment-item">
     <div>
       <el-row>
-        <el-col :span="4" :md="3" :lg="4">
+        <el-col :span="4" :xs="5" :md="3" :lg="4">
           <img
+            class="avatar"
             :src="avatarURI + comment.Email"
             alt="头像"
             @error="onDefaultImage"
           />
         </el-col>
-        <el-col :span="20" :md="21" :lg="20">
+        <el-col :span="20" :xs="19" :md="21" :lg="20">
           <div>
             {{ comment.Nickname || nickname }}
           </div>
@@ -66,6 +67,16 @@ export default {
 @import '~/assets/style/comment.scss';
 
 section.view-comment-item {
+  @media (max-width: 765px) {
+    margin: 0.6rem;
+    padding: 0.5rem 0;
+
+    div.el-col {
+      & > img.avatar {
+        width: 80%;
+      }
+    }
+  }
   border-bottom: 1px solid $--color-border;
   padding: 0.8rem 0;
   padding-top: 0;

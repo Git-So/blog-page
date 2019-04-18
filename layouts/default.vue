@@ -7,13 +7,13 @@
 
       <el-container>
         <el-row class="container">
-          <el-col :xs="24" :lg="isHideAide ? 24 : 15" class="main">
+          <el-col :xs="24" :lg="dataIsHideAide ? 24 : 15" class="main">
             <!-- 路由渲染 -->
             <nuxt />
           </el-col>
           <el-col
             :xs="0"
-            :lg="isHideAide ? 0 : 9"
+            :lg="dataIsHideAide ? 0 : 9"
             class="aside hidden-md-and-down"
           >
             <view-aside />
@@ -40,7 +40,7 @@ export default {
     'view-footer': ViewFooter
   },
   computed: {
-    isHideAide() {
+    dataIsHideAide() {
       return this.$store.state.IsHideAide
     }
   }

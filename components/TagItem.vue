@@ -25,6 +25,6 @@ export default {
 <style lang="scss">
 .view-tag-item {
   display: inline-block;
-  margin: 0.4rem 0.2rem;
+  margin: 0.4rem;
 }
 </style>

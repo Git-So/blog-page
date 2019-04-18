@@ -90,6 +90,26 @@ export default {
 </script>
 <style lang="scss">
 section.view-link-item {
+  @media (max-width: 765px) {
+    width: 48%;
+
+    & > div.el-card.is-always-shadow {
+      min-height: 15rem;
+      .el-card__body {
+        padding: 14px;
+
+        div.link-info {
+          font-size: 0.85rem;
+          div.link-avater {
+            margin-bottom: 1.5rem;
+          }
+          div.link-nickname {
+            margin-bottom: 0.5rem;
+          }
+        }
+      }
+    }
+  }
   width: 12.8rem;
   display: inline-block;
   margin: 0.8rem;

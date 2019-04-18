@@ -2,8 +2,11 @@
   <section class="page-about">
     <!-- 关于 -->
     <h3>关于</h3>
-    <el-card v-loading="loading" class="about markdown-body">
-      {{ dataMe.Bio }}
+    <el-card
+      v-loading="loading"
+      class="about markdown-body"
+      v-html="dataMe.Bio"
+    >
     </el-card>
 
     <!-- 联系我 -->
@@ -46,6 +49,9 @@ section.page-about {
   div.el-card.contact-me {
     min-height: 8rem;
     margin-bottom: 1.24rem;
+  }
+  div.el-card.about {
+    padding: 1rem;
   }
 
   div.el-card.contact-me {

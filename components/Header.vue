@@ -1,7 +1,7 @@
 <template>
   <section class="view-header">
     <div class="search hidden-md-and-up">
-      <view-search v-model="search" @keyup.enter.native="Search" />
+      <view-search v-model="search" @keyup.enter.native="onSearch" />
     </div>
     <el-row :gutter="40">
       <el-col :span="14" class="header-title hidden-sm-and-down">
@@ -9,7 +9,7 @@
           <router-link to="/" class="title">{{ dataSiteName }}</router-link>
         </div>
       </el-col>
-      <el-col :span="10" class="header-menu">
+      <el-col :span="10" :xs="24" class="header-menu">
         <div class="grid-content ">
           <div class="menu-active"></div>
           <el-menu mode="horizontal" :default-active="dataActiveIndex">
@@ -38,6 +38,11 @@ export default {
     'view-search': ViewSearch
   },
   mixins: [Search],
+  data() {
+    return {
+      pageClass: 'article'
+    }
+  },
   computed: {
     dataSiteName() {
       return this.$store.state.SiteName
@@ -89,6 +94,18 @@ export default {
 @import '~/assets/style/_var.scss';
 
 section.view-header {
+  @media (max-width: 765px) {
+    padding: 0;
+
+    div.el-card {
+      border: none;
+      box-shadow: none;
+
+      div.el-card__body {
+        padding-bottom: 0px;
+      }
+    }
+  }
   position: fixed;
   top: 0;
   left: 0;
@@ -113,6 +130,14 @@ section.view-header {
   .header-menu.el-col {
     ul.el-menu {
       border-bottom: none;
+
+      @media (max-width: 765px) {
+        li.el-menu-item {
+          width: 20%;
+          text-align: center;
+          padding: 0;
+        }
+      }
 
       li.el-menu-item.is-active {
         color: $--color-title;

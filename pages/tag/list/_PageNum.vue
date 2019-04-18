@@ -11,6 +11,9 @@
     <div v-loading="loading" class="block-list">
       <el-card class="list" shadow="hover">
         <view-tag-item v-for="item in list" :key="item.ID" :tag="item" />
+        <div v-if="loading || !count" class="nil-data">
+          暂时还没有标签哦!
+        </div>
       </el-card>
     </div>
 

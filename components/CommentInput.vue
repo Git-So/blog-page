@@ -299,7 +299,8 @@ export default {
       this.inputEl.focus()
     },
     onClearInput() {
-      this.input = ''
+      this.isInput = true
+      this.hideAllContent()
     },
     onSelectEmoji() {
       // 显示Emoji选择框
@@ -513,6 +514,34 @@ export default {
 @import '~/assets/style/comment.scss';
 
 .view-comment-input {
+  @media (max-width: 765px) {
+    $xs-width: 20rem;
+    $xs-height: 12.4rem;
+    $xs-toolbar-height: 2.5rem;
+    width: $xs-width;
+    height: $xs-height;
+    margin: 0 auto;
+
+    div.toolbar {
+      height: $xs-toolbar-height;
+    }
+
+    div.content {
+      height: $xs-height - $xs-toolbar-height;
+
+      .input,
+      div.input-emoji,
+      .preview,
+      .help {
+        height: $xs-height - $xs-toolbar-height;
+
+        & > div,
+        & > textarea {
+          height: $xs-height - $xs-toolbar-height;
+        }
+      }
+    }
+  }
   $content-select-padding: 0.5rem;
   $span-emoji-width: 3.5rem;
   $content-scrollbar-width: 0.4rem;

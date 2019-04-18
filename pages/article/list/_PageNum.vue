@@ -10,6 +10,9 @@
     <h3>最新文章</h3>
     <div v-loading="loading" class="block-list">
       <view-article-item v-for="item in list" :key="item.ID" :article="item" />
+      <div v-if="loading || !count" class="nil-data">
+        暂时还没有文章哦!
+      </div>
     </div>
 
     <!-- 翻页 -->
