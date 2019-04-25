@@ -70,6 +70,7 @@ typings/
 
 # Nuxt generate
 dist
+dist.tar.gz
 
 # vuepress build output
 .vuepress/dist
@@ -79,6 +80,7 @@ dist
 
 # IDE
 .idea
+blog-page.code-workspace
 
 # Service worker
 sw.*

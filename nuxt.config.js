@@ -3,6 +3,16 @@ import pkg from './package'
 export default {
   mode: 'spa',
 
+  /**
+   * Env
+   */
+  env: {
+    baseUrl:
+      process.env.NODE_ENV == 'production'
+        ? 'http://sooo.site/api'
+        : 'http://admin.blog.sohe.top/api'
+  },
+
   /*
    ** Headers of the page
    */
@@ -48,9 +58,12 @@ export default {
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
     https: false,
-    host: '172.17.0.2',
-    port: '8097',
-    prefix: '/api/v1/',
+    host:
+      process.env.NODE_ENV == 'production'
+        ? 'http://sooo.site/api'
+        : 'http://admin.blog.sohe.top/api',
+    port: '80',
+    prefix: '/api/',
     progress: true,
     credentials: true,
     retry: {
