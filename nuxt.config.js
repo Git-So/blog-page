@@ -47,9 +47,9 @@ export default {
    */
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
-    https: !!process.env.DEV_MODE,
-    host: process.env.DEV_MODE ? 'sooo.site' : 'admin.blog.sohe.top',
-    port: process.env.DEV_MODE ? '443' : '80',
+    https: !process.env.DEV_MODE,
+    host: process.env.DEV_MODE ? 'admin.blog.sohe.top' : 'sooo.site',
+    port: process.env.DEV_MODE ? '80' : '443',
     prefix: '/api/',
     progress: true,
     credentials: true,
