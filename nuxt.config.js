@@ -49,7 +49,7 @@ export default {
     // See https://github.com/nuxt-community/axios-module#options
     https: !!process.env.DEV_MODE,
     host: process.env.DEV_MODE ? 'sooo.site' : 'admin.blog.sohe.top',
-    port: process.env.NODE_ENV ? '443' : '80',
+    port: process.env.DEV_MODE ? '443' : '80',
     prefix: '/api/',
     progress: true,
     credentials: true,
