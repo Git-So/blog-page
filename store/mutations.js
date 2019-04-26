@@ -22,7 +22,6 @@ export default {
     }
   },
   setMenuActiveIndexKey(state, key) {
-    console.log(key)
     state.MenuActiveIndex = state.MenuList[key].index
   },
   setMeData(state, obj) {
