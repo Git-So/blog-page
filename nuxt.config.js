@@ -47,9 +47,10 @@ export default {
    */
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
-    https: !process.env.DEV_MODE,
-    host: process.env.DEV_MODE ? 'admin.blog.sohe.top' : 'sooo.site',
-    port: process.env.DEV_MODE ? '80' : '443',
+    https: !(process.env.NODE_ENV === 'development'),
+    host:
+      process.env.NODE_ENV === 'development' ? 'blog.sohe.top' : 'sooo.site',
+    port: process.env.NODE_ENV === 'development' ? '80' : '443',
     prefix: '/api/',
     progress: true,
     credentials: true,
@@ -107,7 +108,7 @@ export default {
    * server
    */
   server: {
-    port: 9091, // default: 3000
+    port: 9090, // default: 3000
     host: '0.0.0.0' // default: localhost
   }
 }

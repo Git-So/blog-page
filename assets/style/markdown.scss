@@ -87,7 +87,7 @@
     font-family: Roboto Mono, Monaco, courier, monospace;
     font-size: $--font-size-code;
     margin: 1.2em 0;
-    padding: 0 1.4rem;
+    padding: 1.6rem 1.4rem;
     position: relative;
     height: auto;
 
@@ -112,8 +112,9 @@
     .hljs,
     code {
       // color: $--color-code-text;
-      padding: 2.2em 0;
-      padding-bottom: 1.2rem;
+      padding: 0;
+      padding-bottom: 0;
+      font-size: $--font-size-code;
     }
   }
 
