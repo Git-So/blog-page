@@ -17,6 +17,9 @@ export default {
     for (const key in state.MenuList) {
       if (state.MenuList[key].index === MenuActiveIndex) {
         state.MenuList[key].path = path
+        state.HeaderActiveStyle = {
+          left: key * 18 + 5 + '%'
+        }
         break
       }
     }
@@ -41,6 +44,9 @@ export default {
   },
   setArticleActiveNav(state, data) {
     state.Aside.activeNav = data
+  },
+  setHeaderActiveStyle(state, data) {
+    state.HeaderActiveStyle = data
   },
   setApiCache(state, obj) {
     state.ApiCache[obj.key] = obj.value

@@ -43,6 +43,7 @@ export default () => ({
     }
   ],
   MenuActiveIndex: 'article',
+  HeaderActiveStyle: {},
   IsHideAide: false,
   Aside: {
     isHideHot: false,

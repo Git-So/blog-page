@@ -11,7 +11,7 @@
       </el-col>
       <el-col :span="10" :xs="24" class="header-menu">
         <div class="grid-content ">
-          <div class="menu-active"></div>
+          <div class="menu-active" :style="dataHeaderActiveStyle"></div>
           <el-menu mode="horizontal" :default-active="dataActiveIndex">
             <el-menu-item
               v-for="item in dataList"
@@ -57,6 +57,9 @@ export default {
       set(value) {
         this.$store.commit('setMenuActiveIndex', value)
       }
+    },
+    dataHeaderActiveStyle() {
+      return this.$store.state.HeaderActiveStyle
     }
   },
   watch: {
@@ -105,6 +108,14 @@ section.view-header {
         padding-bottom: 0px;
       }
     }
+
+    .header-menu.el-col {
+      ul.el-menu {
+        li.el-menu-item {
+          border-bottom: 0;
+        }
+      }
+    }
   }
   position: fixed;
   top: 0;
@@ -128,6 +139,16 @@ section.view-header {
   }
 
   .header-menu.el-col {
+    position: relative;
+    .menu-active {
+      position: absolute;
+      bottom: 0;
+      z-index: 10086;
+      width: 18%;
+      height: 2px;
+      border-bottom: 2px solid $--color-primary;
+    }
+
     ul.el-menu {
       border-bottom: none;
 

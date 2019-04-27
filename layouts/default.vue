@@ -74,6 +74,14 @@ export default {
         }
       }
       return indexKey
+    },
+    dataHeaderActiveStyle: {
+      get() {
+        return this.$store.state.setHeaderActiveStyle
+      },
+      set(data) {
+        this.$store.commit('setHeaderActiveStyle', data)
+      }
     }
   },
   methods: {
@@ -84,6 +92,7 @@ export default {
         this.headTop = this.headTop
         this.maginTop = 115 + this.headTop
       }
+      this.onRest()
     },
     onTouchStart(even) {
       this.startX = event.changedTouches[0].screenX
@@ -91,6 +100,33 @@ export default {
     },
     onTouchMove(even) {
       this.countX++
+
+      // 上下滑动
+      const moveXNum = event.changedTouches[0].screenX - this.startX
+      const moveYNum = event.changedTouches[0].screenY - this.startY
+      if (Math.abs(moveYNum) > Math.abs(moveXNum)) {
+        return
+      }
+
+      // 移动距离
+      let minLeft =
+        this.dataMenuActiveIndexKey * 18 - 18 < 0
+          ? 0
+          : this.dataMenuActiveIndexKey * 18 - 18
+      let maxLeft =
+        this.dataMenuActiveIndexKey * 18 + 18 > 80
+          ? 80
+          : this.dataMenuActiveIndexKey * 18 + 18
+      let left =
+        -(moveXNum / this.srceenWidth / 0.2) * 18 +
+        this.dataMenuActiveIndexKey * 18
+
+      left = left < minLeft ? minLeft : left
+      left = left > maxLeft ? maxLeft : left
+
+      this.dataHeaderActiveStyle = {
+        left: left + 5 + '%'
+      }
     },
     onTouchEnd(even) {
       // 屏幕大小
@@ -107,6 +143,7 @@ export default {
       const moveXNum = event.changedTouches[0].screenX - this.startX
       const moveYNum = event.changedTouches[0].screenY - this.startY
       if (Math.abs(moveYNum) > Math.abs(moveXNum)) {
+        this.onRest()
         return
       }
       console.log('左右滑动')
@@ -115,7 +152,7 @@ export default {
 
       // 移动距离比
       const touchNum = moveXNum / this.srceenWidth
-      if (Math.abs(touchNum) > 0.3) {
+      if (Math.abs(touchNum) > 0.2) {
         key = touchNum < 0 ? ++key : --key
         // minKey
         const minKey = 0
@@ -129,6 +166,13 @@ export default {
         // 切换key
         this.$store.commit('setMenuActiveIndexKey', key)
         this.$router.push(this.dataMenuList[key].path)
+      } else {
+        this.onRest()
+      }
+    },
+    onRest() {
+      this.dataHeaderActiveStyle = {
+        left: this.dataMenuActiveIndexKey * 18 + 5 + '%'
       }
     }
   }
